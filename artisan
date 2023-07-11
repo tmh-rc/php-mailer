@@ -1,0 +1,24 @@
+<?php
+
+if(! isset($argv[1])) {
+    echo "Invalid command";
+    exit;
+}
+
+$cmd = $argv[1];
+
+if(! in_array($cmd, ['init', 'serve'])) {
+    echo "Invalid command";
+    exit;
+}
+
+if($cmd == "init") {
+    exec('composer install');
+    copy('.env.example', '.env');
+    echo "Done";
+    exit;
+}
+
+if($cmd == "serve") {
+    exec('php -S localhost:3000');
+}
