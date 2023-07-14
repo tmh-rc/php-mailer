@@ -13,8 +13,8 @@ require '../vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(app_path());
 $dotenv->load();
 
-if($_SERVER['REQUEST_METHOD'] != 'POST') {
-    redirect('/phpmailer/phpmailer_form.php');
+if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+    redirect('/phpmailer/index.php');
 }
 
 $name = $_POST['name'] ?? '';
@@ -28,7 +28,7 @@ $body = nl2br($body);
 
 if (empty($to) || empty($subject) || empty($body)) {
     $_SESSION['message'] = 'To address, subject, body fields are required.';
-    redirect('/phpmailer/phpmailer_form.php');
+    redirect('/phpmailer/index.php');
 }
 
 //Create an instance; passing `true` enables exceptions
@@ -65,9 +65,9 @@ try {
 
     $mail->send();
     $_SESSION['message'] = 'Message has been sent';
-    redirect('/phpmailer/phpmailer_form.php');
+    redirect('/phpmailer/index.php');
 
 } catch (Exception $e) {
     $_SESSION['message'] = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-    redirect('/phpmailer/phpmailer_form.php');
+    redirect('/phpmailer/index.php');
 }
