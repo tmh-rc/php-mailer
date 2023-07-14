@@ -1,4 +1,3 @@
-<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,13 +41,30 @@
             background: #ddd;
             padding: 1rem;
         }
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        nav a {
+            margin: 0 10px;
+            font-size: 20px;
+        }
+        nav a:hover {
+            color: #1a7def;
+        }
     </style>
 </head>
 <body>
-    <?php if (isset($_SESSION['message'])): ?>
-        <div class="message">
-        <?php echo $_SESSION['message'];unset($_SESSION['message']); ?>
-        </div>
-    <?php endif; ?>
+    <nav>
+        <a href="/phpmailer/index.php">PHP Mailer</a>
+        |
+        <a href="/symfony_mailer/index.php">Symfony Mailer</a>
+    </nav>
 
-<a href=""></a>
+
+    <?php if ($message): ?>
+        <div class="message"> <?php echo $message; ?> </div>
+    <?php endif;?>
+
